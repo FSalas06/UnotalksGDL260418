@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabbedPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="CognitiveServices.Views.CognitivePage" 
+    Title="Unotalks"
+    NavigationPage.HasNavigationBar="true" 
+    NavigationPage.HasBackButton="true" >
+    <ContentPage Title="Face API" Icon="faceapi.png">
+        
+    </ContentPage>
+    <ContentPage Title="Text API" Icon="textapi.png">
+        <Grid BackgroundColor="Red">
+            
+        </Grid>
+    </ContentPage>
+    <ContentPage Title="Visio API" Icon="visionapi.png">
+        <Grid>
+            
+        </Grid>
+    </ContentPage>
+</TabbedPage>
