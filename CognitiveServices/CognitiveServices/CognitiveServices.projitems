@@ -16,6 +16,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\CognitivePage.xaml.cs">
       <DependentUpon>CognitivePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\CardView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FaceApiViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
@@ -29,5 +31,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Services\" />
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Common\" />
   </ItemGroup>
 </Project>

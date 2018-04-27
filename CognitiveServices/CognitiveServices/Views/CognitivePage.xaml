@@ -7,7 +7,24 @@
     NavigationPage.HasNavigationBar="true" 
     NavigationPage.HasBackButton="true" >
     <ContentPage Title="Face API" Icon="faceapi.png">
-        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Row="0"/>
+
+            <Button Text="Take a Photo" Grid.Row="1"/>
+
+            <Grid Grid.Row="2">
+                
+            </Grid>
+        </Grid>
     </ContentPage>
     <ContentPage Title="Text API" Icon="textapi.png">
         <Grid BackgroundColor="Red">
