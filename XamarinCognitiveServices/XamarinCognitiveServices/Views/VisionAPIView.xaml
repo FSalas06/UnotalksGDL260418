@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="XamarinCognitiveServices.Views.VisionAPIView"
+    xmlns:vm="clr-namespace:XamarinCognitiveServices.ViewModels;assembly=XamarinCognitiveServices" >
+    <ContentPage.BindingContext>
+        <vm:VisionApiViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <StackLayout x:Name="_print" Grid.Row="0">
+                <Label Text="OCR Print" FontAttributes="Bold"/>
+                <Button Text="Take a Photo" Command="{Binding TakePhotoCommand}"/>
+                <Button Text="Import a Photo" Command="{Binding ImportPhotoCommand}"/>
+            </StackLayout>
+            
+            <BoxView Grid.Row="1" HorizontalOptions="FillAndExpand" BackgroundColor="Gray"/>
+
+            <StackLayout x:Name="_handwritten" Grid.Row="2">
+                <Label Text="Handwritten Print" FontAttributes="Bold"/>
+                <Button Text="Take a Photo" />
+                <Button Text="Import a Photo" />
+            </StackLayout>
+
+            <BoxView Grid.Row="3" HorizontalOptions="FillAndExpand" BackgroundColor="Gray" />
+
+            <StackLayout x:Name="_image" Grid.Row="4">
+                <Label Text="Image Analize" FontAttributes="Bold"/>
+                <Button Text="Take a Photo" />
+                <Button Text="Import a Photo" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

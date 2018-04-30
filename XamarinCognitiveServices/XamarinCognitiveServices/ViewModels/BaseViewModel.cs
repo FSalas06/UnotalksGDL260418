@@ -26,5 +26,10 @@ namespace XamarinCognitiveServices.ViewModels
         {
             await UserDialogs.Instance.AlertAsync(message, Constants.NameApplication, okText);
         }
+
+        public virtual async void OnAppearing()
+        {
+            
+        }
     }
 }

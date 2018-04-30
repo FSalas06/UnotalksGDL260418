@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace XamarinCognitiveServices.Interfaces
 {
     interface ITextTranslationService
     {
-        System.Threading.Tasks.Task<string> TranslateTextAsync(string text);
+        Task<string> TranslateTextAsync(string text);
     }
 }

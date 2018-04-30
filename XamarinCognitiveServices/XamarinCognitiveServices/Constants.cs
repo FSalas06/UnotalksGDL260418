@@ -18,5 +18,10 @@
         public static readonly string FaceApiKey = "<Here your Key>";
         public static readonly string FaceEndpoint = "<Your endpoint here>";
 
+        public static readonly string ComputerVisionApiOcrUrl = "";
+        public static readonly string ComputerVisionApiHandwritingUrl = "";
+        public static readonly string ComputerVisionApiImageAnalize = "";
+
+        public static readonly string ComputerVisionApiKey = "";
     }
 }

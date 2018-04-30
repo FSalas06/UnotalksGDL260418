@@ -9,9 +9,5 @@
     NavigationPage.HasBackButton="true">
     <pageservices:FaceApiPage Title="Face API" Icon="faceapi.png"/>
     <pageservices:TextApiView Title="Text API" Icon="textapi.png"/>
-    <ContentPage Title="Visio API" Icon="visionapi.png">
-        <Grid>
-            
-        </Grid>
-    </ContentPage>
+    <pageservices:VisionAPIView Title="Vision API" Icon="visionapi.png"/>
 </TabbedPage>

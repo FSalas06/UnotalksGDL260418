@@ -55,6 +55,16 @@
       <DependentUpon>TextApiView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\TextApiViewModel.cs" />
+    <Compile Include="Views\VisionAPIView.xaml.cs">
+      <DependentUpon>VisionAPIView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\VisionApiViewModel.cs" />
+    <Compile Include="Views\VisionResultView.xaml.cs">
+      <DependentUpon>VisionResultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\VisionResultViewModel.cs" />
+    <Compile Include="Services\VisionAnalizeService.cs" />
+    <Compile Include="Interfaces\IVisionAnalizeService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -116,6 +126,14 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TextApiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\VisionAPIView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\VisionResultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
