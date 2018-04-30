@@ -13,6 +13,15 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enumeration\SpellCheckMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IAuthenticationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IBingSpellCheckService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ITextTranslationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SpellCheckResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\AuthenticationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\BingSpellCheckService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\TextTranslationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Timer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\CognitivePage.xaml.cs">
       <DependentUpon>CognitivePage.xaml</DependentUpon>
     </Compile>
@@ -27,8 +36,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Models\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Services\" />
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />
     <Folder Include="$(MSBuildThisFileDirectory)Common\" />
