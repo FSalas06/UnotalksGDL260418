@@ -20,7 +20,7 @@ namespace XamarinCognitiveServices.Services
 
         public async Task<SpellCheckResult> SpellCheckTextAsync(string text)
         {
-            string requestUri = GenerateRequestUri(Constants.BingSpellCheckEndpoint, text, SpellCheckMode.Spell);
+            string requestUri = GenerateRequestUri(Constants.BingSpellCheckEndpoint, text, SpellCheckMode.Proof);
             var response = await SendRequestAsync(requestUri);
             var spellCheckResults = JsonConvert.DeserializeObject<SpellCheckResult>(response);
             return spellCheckResults;
@@ -29,8 +29,8 @@ namespace XamarinCognitiveServices.Services
         string GenerateRequestUri(string spellCheckEndpoint, string text, SpellCheckMode mode)
         {
             string requestUri = spellCheckEndpoint;
-            requestUri += string.Format("?text={0}", WebUtility.UrlEncode(text));   // text to spell check
-            requestUri += string.Format("&mode={0}", mode.ToString().ToLower());    // spellcheck mode - proof or spell
+            requestUri += string.Format("?text={0}", WebUtility.UrlEncode(text));   
+            requestUri += string.Format("&mode={0}", mode.ToString().ToLower());    
             return requestUri;
         }
 

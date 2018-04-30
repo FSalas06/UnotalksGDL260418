@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 using XamarinCognitiveServices.Interfaces;
 
 namespace XamarinCognitiveServices.Services
@@ -19,7 +21,8 @@ namespace XamarinCognitiveServices.Services
 
         public async Task<string> TranslateTextAsync(string text)
         {
-            if (string.IsNullOrWhiteSpace(authenticationService.GetAccessToken()))
+            
+                if (string.IsNullOrWhiteSpace(authenticationService.GetAccessToken()))
             {
                 await authenticationService.InitializeAsync();
             }
@@ -27,9 +30,9 @@ namespace XamarinCognitiveServices.Services
             string requestUri = GenerateRequestUri(Constants.TextTranslatorEndpoint, text, "es", "en");
             string accessToken = authenticationService.GetAccessToken();
             var response = await SendRequestAsync(requestUri, accessToken);
-            //var xml = XmlDocument.Parse(response);
-            //return xml.Root.Value;
-            return string.Empty;
+            var content = XElement.Parse(response).Value;
+            return content;
+
         }
 
         string GenerateRequestUri(string endpoint, string text, string from, string to)
@@ -52,5 +55,6 @@ namespace XamarinCognitiveServices.Services
             var response = await httpClient.GetAsync(url);
             return await response.Content.ReadAsStringAsync();
         }
+
     }
 }

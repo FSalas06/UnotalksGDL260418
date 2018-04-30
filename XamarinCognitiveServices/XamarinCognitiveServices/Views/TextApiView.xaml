@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:vm="clr-namespace:XamarinCognitiveServices.ViewModels;assembly=XamarinCognitiveServices" 
+    xmlns:helpers="clr-namespace:XamarinCognitiveServices.Helpers;assembly=XamarinCognitiveServices" 
+    x:Class="XamarinCognitiveServices.Views.TextApiView">
+    <ContentPage.BindingContext>
+        <vm:TextApiViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <helpers:NegateBooleanConverter x:Key="Inverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Margin="20" VerticalOptions="StartAndExpand">
+            <Label Text="Text" FontAttributes="Bold" FontSize="Medium"/>
+            <Entry Text="{Binding TextToValidate}" Placeholder="Enter Text here" />
+            <ActivityIndicator HorizontalOptions="Center" IsRunning="{Binding IsBusy}" />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Text="Spell Check" Command="{Binding SpellCheckCommand}" />
+                <Button Text="Translate" Command="{Binding TranslateCommand}" />
+            </StackLayout>
+            <Label Text="The Translate currently it's Only es-en" FontAttributes="Italic"/>
+            <Label Text="I Will apply the change to custom translate" FontAttributes="Italic"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

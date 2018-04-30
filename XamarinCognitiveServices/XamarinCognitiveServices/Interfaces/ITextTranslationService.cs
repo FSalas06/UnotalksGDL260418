@@ -6,5 +6,6 @@ namespace XamarinCognitiveServices.Interfaces
 {
     interface ITextTranslationService
     {
+        System.Threading.Tasks.Task<string> TranslateTextAsync(string text);
     }
 }

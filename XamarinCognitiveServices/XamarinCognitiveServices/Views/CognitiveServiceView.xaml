@@ -3,16 +3,12 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     x:Class="XamarinCognitiveServices.Views.CognitiveServiceView" 
-    xmlns:face="clr-namespace:XamarinCognitiveServices.Views"
+    xmlns:pageservices="clr-namespace:XamarinCognitiveServices.Views"
     Title="Unotalks" 
     NavigationPage.HasNavigationBar="true" 
     NavigationPage.HasBackButton="true">
-    <face:FaceApiPage Title="Face API" Icon="faceapi.png"/>
-    <ContentPage Title="Text API" Icon="textapi.png">
-        <Grid BackgroundColor="Red">
-            
-        </Grid>
-    </ContentPage>
+    <pageservices:FaceApiPage Title="Face API" Icon="faceapi.png"/>
+    <pageservices:TextApiView Title="Text API" Icon="textapi.png"/>
     <ContentPage Title="Visio API" Icon="visionapi.png">
         <Grid>
             
