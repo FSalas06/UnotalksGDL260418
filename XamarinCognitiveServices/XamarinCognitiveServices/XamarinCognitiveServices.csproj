@@ -59,12 +59,11 @@
       <DependentUpon>VisionAPIView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\VisionApiViewModel.cs" />
-    <Compile Include="Views\VisionResultView.xaml.cs">
-      <DependentUpon>VisionResultView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\VisionResultViewModel.cs" />
     <Compile Include="Services\VisionAnalizeService.cs" />
     <Compile Include="Interfaces\IVisionAnalizeService.cs" />
+    <Compile Include="Enumeration\VisionEnum.cs" />
+    <Compile Include="Enumeration\EnumDescriptionAttribute.cs" />
+    <Compile Include="Models\PickerItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -85,9 +84,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ProjectOxford.Common">
-      <HintPath>..\packages\Microsoft.ProjectOxford.Common.1.0.324\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Microsoft.ProjectOxford.Common.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.ProjectOxford.Face">
       <HintPath>..\packages\Microsoft.ProjectOxford.Face.1.4.0\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Microsoft.ProjectOxford.Face.dll</HintPath>
     </Reference>
@@ -102,6 +98,9 @@
     </Reference>
     <Reference Include="Plugin.Permissions">
       <HintPath>..\packages\Plugin.Permissions.2.2.1\lib\netstandard1.0\Plugin.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ProjectOxford.Common">
+      <HintPath>..\packages\Microsoft.ProjectOxford.Common.1.0.324\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Microsoft.ProjectOxford.Common.dll</HintPath>
     </Reference>
     <Reference Include="Splat">
       <HintPath>..\packages\Splat.2.0.0\lib\netstandard1.1\Splat.dll</HintPath>
@@ -130,10 +129,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\VisionAPIView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\VisionResultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

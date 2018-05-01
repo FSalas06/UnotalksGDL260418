@@ -6,6 +6,10 @@ namespace XamarinCognitiveServices.Interfaces
 {
     public interface IVisionAnalizeService
     {
-        Task<ObservableCollection<string>> FetchPrintedWordList(byte[] photo);
+        Task<ObservableCollection<string>> FetchPrintedWordList(byte[] photo, string id);
+
+        Task<ObservableCollection<string>> FetchHandwrittenWordList(byte[] photo, string id);
+
+        Task<string> ImageAnalize(byte[] photo, string id);
     }
 }

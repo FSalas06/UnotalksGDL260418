@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Xamarin.Forms;
 
@@ -29,7 +30,7 @@ namespace XamarinCognitiveServices.ViewModels
 
         public virtual async void OnAppearing()
         {
-            
+            await Task.Delay(0);
         }
     }
 }

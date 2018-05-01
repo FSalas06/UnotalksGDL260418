@@ -2,43 +2,63 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    x:Class="XamarinCognitiveServices.Views.VisionAPIView"
-    xmlns:vm="clr-namespace:XamarinCognitiveServices.ViewModels;assembly=XamarinCognitiveServices" >
+    x:Class="XamarinCognitiveServices.Views.VisionAPIView" 
+    xmlns:vm="clr-namespace:XamarinCognitiveServices.ViewModels;assembly=XamarinCognitiveServices"
+    xmlns:helpers="clr-namespace:XamarinCognitiveServices.Helpers;assembly=XamarinCognitiveServices">
+     <ContentPage.Resources>
+        <ResourceDictionary>
+            <helpers:NegateBooleanConverter x:Key="Inverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.BindingContext>
         <vm:VisionApiViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid>
+        <Grid Padding="10" x:Name="_print" VerticalOptions="CenterAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
-                <RowDefinition Height="1" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <StackLayout x:Name="_print" Grid.Row="0">
-                <Label Text="OCR Print" FontAttributes="Bold"/>
-                <Button Text="Take a Photo" Command="{Binding TakePhotoCommand}"/>
-                <Button Text="Import a Photo" Command="{Binding ImportPhotoCommand}"/>
+            <Image 
+                Grid.Row="0" 
+                Source="{Binding AnalizedImage}" 
+                HeightRequest="100" 
+                WidthRequest="100"/>
+            <StackLayout 
+                Grid.Row="1" 
+                HorizontalOptions="FillAndExpand"                 
+                IsVisible="{Binding IsBusy, Converter={StaticResource Inverter}}"
+                Spacing="10">
+                <Picker 
+                    Title="Vision Function" 
+                    ItemsSource="{Binding OcrList}" 
+                    ItemDisplayBinding="{Binding Title}"
+                    SelectedItem="{Binding SelectedFunction}"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Button 
+                        Text="Take a Photo" 
+                        Command="{Binding TakePhotoCommand}" />
+                    <Button 
+                        Text="Import a Photo" 
+                        Command="{Binding ImportPhotoCommand}" />
+                </StackLayout>
             </StackLayout>
-            
-            <BoxView Grid.Row="1" HorizontalOptions="FillAndExpand" BackgroundColor="Gray"/>
-
-            <StackLayout x:Name="_handwritten" Grid.Row="2">
-                <Label Text="Handwritten Print" FontAttributes="Bold"/>
-                <Button Text="Take a Photo" />
-                <Button Text="Import a Photo" />
-            </StackLayout>
-
-            <BoxView Grid.Row="3" HorizontalOptions="FillAndExpand" BackgroundColor="Gray" />
-
-            <StackLayout x:Name="_image" Grid.Row="4">
-                <Label Text="Image Analize" FontAttributes="Bold"/>
-                <Button Text="Take a Photo" />
-                <Button Text="Import a Photo" />
+            <ScrollView Grid.Row="2" IsVisible="{Binding IsBusy, Converter={StaticResource Inverter}}">
+                <StackLayout>                    
+                    <Label 
+                        Text="{Binding JsonResponse}" />
+                    <ListView 
+                        ItemsSource="{Binding Values}" 
+                        SeparatorVisibility="None" />
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Grid.Row="2" IsVisible="{Binding IsBusy}">
+                <ActivityIndicator 
+                    IsRunning="{Binding IsBusy}" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>
