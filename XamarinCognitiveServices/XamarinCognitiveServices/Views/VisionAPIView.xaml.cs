@@ -7,9 +7,9 @@ using Xamarin.Forms.Xaml;
 namespace XamarinCognitiveServices.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TextApiView : ContentPage
+    public partial class VisionAPIView : ContentPage
     {
-        public TextApiView()
+        public VisionAPIView()
         {
             InitializeComponent();
         }

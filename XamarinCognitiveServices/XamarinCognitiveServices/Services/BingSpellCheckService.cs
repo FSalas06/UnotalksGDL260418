@@ -15,7 +15,7 @@ namespace XamarinCognitiveServices.Services
         public BingSpellCheckService()
         {
             httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", Constants.BingSpellCheckApiKey);
+            httpClient.DefaultRequestHeaders.Add(Constants.OcpApimSubscriptionKey, Constants.BingSpellCheckApiKey);
         }
 
         public async Task<SpellCheckResult> SpellCheckTextAsync(string text)

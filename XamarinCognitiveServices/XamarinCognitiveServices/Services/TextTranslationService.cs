@@ -1,10 +1,8 @@
 ﻿using System;
-using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 using XamarinCognitiveServices.Interfaces;
 
 namespace XamarinCognitiveServices.Services
@@ -21,8 +19,7 @@ namespace XamarinCognitiveServices.Services
 
         public async Task<string> TranslateTextAsync(string text)
         {
-            
-                if (string.IsNullOrWhiteSpace(authenticationService.GetAccessToken()))
+            if (string.IsNullOrWhiteSpace(authenticationService.GetAccessToken()))
             {
                 await authenticationService.InitializeAsync();
             }

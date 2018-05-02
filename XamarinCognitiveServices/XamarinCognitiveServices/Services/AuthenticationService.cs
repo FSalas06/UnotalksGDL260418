@@ -23,7 +23,7 @@ namespace XamarinCognitiveServices.Services
         {
             subscriptionKey = apiKey;
             httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKey);
+            httpClient.DefaultRequestHeaders.Add(Constants.OcpApimSubscriptionKey, apiKey);
         }
 
         /// <summary>

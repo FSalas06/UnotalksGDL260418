@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Xamarin.Forms;
 
@@ -25,6 +26,11 @@ namespace XamarinCognitiveServices.ViewModels
         public async void DisplayAlert(string message, string okText = "OK")
         {
             await UserDialogs.Instance.AlertAsync(message, Constants.NameApplication, okText);
+        }
+
+        public virtual async void OnAppearing()
+        {
+            await Task.Delay(0);
         }
     }
 }

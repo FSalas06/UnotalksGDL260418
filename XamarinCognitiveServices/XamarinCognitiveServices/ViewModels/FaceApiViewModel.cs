@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.ProjectOxford.Face;
 using Microsoft.ProjectOxford.Face.Contract;
@@ -172,8 +173,10 @@ namespace XamarinCognitiveServices.ViewModels
             {
                 photo = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                 {
-                    Name = "emotion.jpg",
                     PhotoSize = PhotoSize.Small,
+                    AllowCropping = true,
+                    SaveToAlbum = true,
+                    Name = $"{DateTime.UtcNow}.jpg"
                 });
 
                 if (photo != null)
@@ -190,7 +193,7 @@ namespace XamarinCognitiveServices.ViewModels
             IsBusy = false;
         }
 
-        async System.Threading.Tasks.Task FaceApiDetectAsync()
+        async Task FaceApiDetectAsync()
         {
             try
             {
