@@ -53,9 +53,11 @@ public static readonly string ComputerVisionEndpoint = "<Here your endpoint>";
 
 - [x] Create a funtional project Xamarin.Forms
 - [x] Create a Git Repo
+- [x] Documentation Code
 - [ ] Clean Code
-- [ ] Documentation Code
 - [ ] Integrate Speech API
 - [ ] Integrate Bing Search API
 - [ ] Work into intuitive examples
+- [ ] Splash Screen Android/IOS
+
 

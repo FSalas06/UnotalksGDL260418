@@ -9,21 +9,24 @@ namespace XamarinCognitiveServices.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        string subscriptionKey;
-        string token;
-        Timer accessTokenRenewer;
-        const int RefreshTokenDuration = 9;
-        HttpClient httpClient;
+        #region private properties
+        string _subscriptionKey;
+        string _token;
+        Timer _accessTokenRenewer;
+        const int _refreshTokenDuration = 9;
+        HttpClient _httpClient;
+        #endregion
 
+        #region public methods
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthenticationService"/> class.
         /// </summary>
         /// <param name="apiKey">The API key.</param>
         public AuthenticationService(string apiKey)
         {
-            subscriptionKey = apiKey;
-            httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Add(Constants.OcpApimSubscriptionKey, apiKey);
+            _subscriptionKey = apiKey;
+            _httpClient = new HttpClient();
+            _httpClient.DefaultRequestHeaders.Add(Constants.OcpApimSubscriptionKey, apiKey);
         }
 
         /// <summary>
@@ -32,8 +35,8 @@ namespace XamarinCognitiveServices.Services
         /// <returns></returns>
         public async Task InitializeAsync()
         {
-            token = await FetchTokenAsync(Constants.AuthenticationTokenEndpoint);
-            accessTokenRenewer = new Timer(new TimerCallback(OnTokenExpiredCallback), this, TimeSpan.FromMinutes(RefreshTokenDuration), TimeSpan.FromMilliseconds(-1));
+            _token = await FetchTokenAsync(Constants.AuthenticationTokenEndpoint);
+            _accessTokenRenewer = new Timer(new TimerCallback(OnTokenExpiredCallback), this, TimeSpan.FromMinutes(_refreshTokenDuration), TimeSpan.FromMilliseconds(-1));
         }
 
         /// <summary>
@@ -42,16 +45,18 @@ namespace XamarinCognitiveServices.Services
         /// <returns></returns>
         public string GetAccessToken()
         {
-            return token;
+            return _token;
         }
+        #endregion
 
+        #region private methods
         /// <summary>
         /// Renews the access token.
         /// </summary>
         /// <returns></returns>
         async Task RenewAccessToken()
         {
-            token = await FetchTokenAsync(Constants.AuthenticationTokenEndpoint);
+            _token = await FetchTokenAsync(Constants.AuthenticationTokenEndpoint);
             Debug.WriteLine("Renewed token.");
         }
 
@@ -74,7 +79,7 @@ namespace XamarinCognitiveServices.Services
             {
                 try
                 {
-                    accessTokenRenewer.Change(TimeSpan.FromMinutes(RefreshTokenDuration), TimeSpan.FromMilliseconds(-1));
+                    _accessTokenRenewer.Change(TimeSpan.FromMinutes(_refreshTokenDuration), TimeSpan.FromMilliseconds(-1));
                 }
                 catch (Exception ex)
                 {
@@ -93,8 +98,9 @@ namespace XamarinCognitiveServices.Services
             UriBuilder uriBuilder = new UriBuilder(fetchUri);
             uriBuilder.Path += "/issueToken";
 
-            var result = await httpClient.PostAsync(uriBuilder.Uri.AbsoluteUri, null);
+            var result = await _httpClient.PostAsync(uriBuilder.Uri.AbsoluteUri, null);
             return await result.Content.ReadAsStringAsync();
         }
+        #endregion
     }
 }

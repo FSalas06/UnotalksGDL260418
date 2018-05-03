@@ -13,8 +13,9 @@ namespace XamarinCognitiveServices.ViewModels
 {
     public class FaceApiViewModel : BaseViewModel
     {
-        readonly IFaceServiceClient faceServiceClient;
-        MediaFile photo;
+        #region private properties
+        readonly IFaceServiceClient _faceServiceClient;
+        MediaFile _photo;
         ImageSource _faceApiImage;
         string _emotionString;
         string _ageString;
@@ -23,8 +24,13 @@ namespace XamarinCognitiveServices.ViewModels
         string _genderString;
         string _smileString;
         bool _isBusy;
+        #endregion
 
-
+        #region public properties
+        /// <summary>
+        /// Gets or sets the face API image.
+        /// </summary>
+        /// <value>The face API image.</value>
         public ImageSource FaceApiImage
         {
             get
@@ -37,6 +43,11 @@ namespace XamarinCognitiveServices.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this
+        /// <see cref="T:XamarinCognitiveServices.ViewModels.FaceApiViewModel"/> is busy.
+        /// </summary>
+        /// <value><c>true</c> if is busy; otherwise, <c>false</c>.</value>
         public bool IsBusy
         {
             get
@@ -49,6 +60,10 @@ namespace XamarinCognitiveServices.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets the emotion string.
+        /// </summary>
+        /// <value>The emotion string.</value>
         public string EmotionString
         {
             get
@@ -61,6 +76,10 @@ namespace XamarinCognitiveServices.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets the age string.
+        /// </summary>
+        /// <value>The age string.</value>
         public string AgeString
         {
             get
@@ -73,6 +92,10 @@ namespace XamarinCognitiveServices.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets the glasses string.
+        /// </summary>
+        /// <value>The glasses string.</value>
         public string GlassesString
         {
             get
@@ -85,6 +108,10 @@ namespace XamarinCognitiveServices.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets the hair string.
+        /// </summary>
+        /// <value>The hair string.</value>
         public string HairString
         {
             get
@@ -97,6 +124,10 @@ namespace XamarinCognitiveServices.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets the smile string.
+        /// </summary>
+        /// <value>The smile string.</value>
         public string SmileString
         {
             get
@@ -109,6 +140,10 @@ namespace XamarinCognitiveServices.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets the gender string.
+        /// </summary>
+        /// <value>The gender string.</value>
         public string GenderString
         {
             get
@@ -121,24 +156,42 @@ namespace XamarinCognitiveServices.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets the take photo command.
+        /// </summary>
+        /// <value>The take photo command.</value>
         public ICommand TakePhotoCommand
         {
             private set; get;
         }
 
+        /// <summary>
+        /// Gets the import photo command.
+        /// </summary>
+        /// <value>The import photo command.</value>
         public ICommand ImportPhotoCommand
         {
             private set; get;
         }
+        #endregion
 
+        #region public methods
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:XamarinCognitiveServices.ViewModels.FaceApiViewModel"/> class.
+        /// </summary>
         public FaceApiViewModel()
         {
-            faceServiceClient = new FaceServiceClient(Constants.FaceApiKey, Constants.FaceEndpoint);
+            _faceServiceClient = new FaceServiceClient(Constants.FaceApiKey, Constants.FaceEndpoint);
             TakePhotoCommand = new Command(OnTakePhoto);
             ImportPhotoCommand = new Command(OnImportPhoto);
             IsBusy = false;
         }
+        #endregion
 
+        #region private methods
+        /// <summary>
+        /// Ons the import photo.
+        /// </summary>
         async void OnImportPhoto()
         {
             IsBusy = true;
@@ -147,11 +200,11 @@ namespace XamarinCognitiveServices.ViewModels
             // Take photo
             if (CrossMedia.Current.IsPickPhotoSupported)
             {
-                photo = await CrossMedia.Current.PickPhotoAsync();
+                _photo = await CrossMedia.Current.PickPhotoAsync();
 
-                if (photo != null)
+                if (_photo != null)
                 {
-                    FaceApiImage = ImageSource.FromStream(photo.GetStream);
+                    FaceApiImage = ImageSource.FromStream(_photo.GetStream);
                 }
             }
             else
@@ -163,6 +216,9 @@ namespace XamarinCognitiveServices.ViewModels
             IsBusy = false;
         }
 
+        /// <summary>
+        /// Ons the take photo.
+        /// </summary>
         async void OnTakePhoto()
         {
             IsBusy = true;
@@ -171,7 +227,7 @@ namespace XamarinCognitiveServices.ViewModels
             // Take photo
             if (CrossMedia.Current.IsCameraAvailable || CrossMedia.Current.IsTakePhotoSupported)
             {
-                photo = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                _photo = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                 {
                     PhotoSize = PhotoSize.Small,
                     AllowCropping = true,
@@ -179,9 +235,9 @@ namespace XamarinCognitiveServices.ViewModels
                     Name = $"{DateTime.UtcNow}.jpg"
                 });
 
-                if (photo != null)
+                if (_photo != null)
                 {
-                    FaceApiImage = ImageSource.FromStream(photo.GetStream);
+                    FaceApiImage = ImageSource.FromStream(_photo.GetStream);
                 }
             }
             else
@@ -193,11 +249,15 @@ namespace XamarinCognitiveServices.ViewModels
             IsBusy = false;
         }
 
+        /// <summary>
+        /// Faces the API detect async.
+        /// </summary>
+        /// <returns>The API detect async.</returns>
         async Task FaceApiDetectAsync()
         {
             try
             {
-                if (photo != null)
+                if (_photo != null)
                 {
                     var faceAttributes = new FaceAttributeType[]
                     {
@@ -209,9 +269,9 @@ namespace XamarinCognitiveServices.ViewModels
                         FaceAttributeType.Smile
                     };
 
-                    using (var photoStream = photo.GetStream())
+                    using (var photoStream = _photo.GetStream())
                     {
-                        Face[] faces = await faceServiceClient.DetectAsync(photoStream, true, false, faceAttributes);
+                        Face[] faces = await _faceServiceClient.DetectAsync(photoStream, true, false, faceAttributes);
                         if (faces.Any())
                         {
                             //Emotions detected are happiness, sadness, surprise, anger, fear, contempt, disgust, or neutral.
@@ -221,7 +281,7 @@ namespace XamarinCognitiveServices.ViewModels
                             GenderString = faces.FirstOrDefault().FaceAttributes.Gender;
                             SmileString = faces.FirstOrDefault().FaceAttributes.Smile > 0.5 ? "Smiling :)" : "Not Smiling :(";
                         }
-                        photo.Dispose();
+                        _photo.Dispose();
                     }
                 }
             }
@@ -236,5 +296,6 @@ namespace XamarinCognitiveServices.ViewModels
                 IsBusy = false;
             }
         }
+        #endregion
     }
 }

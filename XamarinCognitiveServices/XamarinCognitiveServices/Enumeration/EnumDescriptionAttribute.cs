@@ -7,16 +7,30 @@ namespace XamarinCognitiveServices.Enumeration
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public class EnumDescriptionAttribute : Attribute
     {
+        #region private properties
         private readonly string description;
+        #endregion
+
+        #region public properties
         public string Description { get { return description; } }
+        #endregion
+
+        #region Public Methods
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="T:XamarinCognitiveServices.Enumeration.EnumDescriptionAttribute"/> class.
+        /// </summary>
+        /// <param name="description">Description.</param>
         public EnumDescriptionAttribute(string description)
         {
             this.description = description;
         }
+        #endregion
     }
 
     public static class EnumHelper
     {
+        #region Public Methods
         /// <summary>
         /// Gets the type of the attribute of.
         /// </summary>
@@ -40,5 +54,6 @@ namespace XamarinCognitiveServices.Enumeration
             var attr = GetAttributeOfType<EnumDescriptionAttribute>(enumVal);
             return attr != null ? attr.Description : string.Empty;
         }
+        #endregion
     }
 }

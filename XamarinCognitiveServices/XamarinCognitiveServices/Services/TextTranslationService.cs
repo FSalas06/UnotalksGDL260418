@@ -9,29 +9,51 @@ namespace XamarinCognitiveServices.Services
 {
     class TextTranslationService : ITextTranslationService
     {
-        IAuthenticationService authenticationService;
-        HttpClient httpClient;
+        #region private properties
+        IAuthenticationService _authenticationService;
+        HttpClient _httpClient;
+        #endregion
 
+        #region public methods
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:XamarinCognitiveServices.Services.TextTranslationService"/> class.
+        /// </summary>
+        /// <param name="authService">Auth service.</param>
         public TextTranslationService(IAuthenticationService authService)
         {
-            authenticationService = authService;
+            _authenticationService = authService;
         }
 
+        /// <summary>
+        /// Translates the text async.
+        /// </summary>
+        /// <returns>The text async.</returns>
+        /// <param name="text">Text.</param>
         public async Task<string> TranslateTextAsync(string text)
         {
-            if (string.IsNullOrWhiteSpace(authenticationService.GetAccessToken()))
+            if (string.IsNullOrWhiteSpace(_authenticationService.GetAccessToken()))
             {
-                await authenticationService.InitializeAsync();
+                await _authenticationService.InitializeAsync();
             }
 
             string requestUri = GenerateRequestUri(Constants.TextTranslatorEndpoint, text, "es", "en");
-            string accessToken = authenticationService.GetAccessToken();
+            string accessToken = _authenticationService.GetAccessToken();
             var response = await SendRequestAsync(requestUri, accessToken);
             var content = XElement.Parse(response).Value;
             return content;
 
         }
+        #endregion
 
+        #region private methods
+        /// <summary>
+        /// Generates the request URI.
+        /// </summary>
+        /// <returns>The request URI.</returns>
+        /// <param name="endpoint">Endpoint.</param>
+        /// <param name="text">Text.</param>
+        /// <param name="from">From.</param>
+        /// <param name="to">To.</param>
         string GenerateRequestUri(string endpoint, string text, string from, string to)
         {
             string requestUri = endpoint;
@@ -41,17 +63,23 @@ namespace XamarinCognitiveServices.Services
             return requestUri;
         }
 
+        /// <summary>
+        /// Sends the request async.
+        /// </summary>
+        /// <returns>The request async.</returns>
+        /// <param name="url">URL.</param>
+        /// <param name="bearerToken">Bearer token.</param>
         async Task<string> SendRequestAsync(string url, string bearerToken)
         {
-            if (httpClient == null)
+            if (_httpClient == null)
             {
-                httpClient = new HttpClient();
+                _httpClient = new HttpClient();
             }
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
 
-            var response = await httpClient.GetAsync(url);
+            var response = await _httpClient.GetAsync(url);
             return await response.Content.ReadAsStringAsync();
         }
-
+        #endregion
     }
 }

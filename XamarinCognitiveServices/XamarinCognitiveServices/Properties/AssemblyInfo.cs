@@ -7,9 +7,9 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle("XamarinCognitiveServices")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Unosquare")]
+[assembly: AssemblyCompany("Unotalks")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCopyright("fsalas06")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
